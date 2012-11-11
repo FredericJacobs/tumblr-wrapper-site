@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block pagetitle %}{{ post_title }}{% endblock %}
+{% block main_section %}
+<section class="main-section blog-section" id="blog-posts">
+  {{ post_data|safe }}
+</section>
+{% endblock %}
+{% block extra_inline_js %}
+$(function() {
+  setupLinks();
+  adjustBlogHeaders();
+  {% if DISQUS_INTEGRATION_ENABLED %}
+  embedDisqus();
+  {% endif %}
+});
+{% endblock %}

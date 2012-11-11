@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="BrainOverflow - Personal website and blog of FredericJacobs. Frederic Jacobs is a software engineer at Storify and a Computer Science student at the Swiss Institute of Technology" />
+  <meta name="keywords" content="Frederic, Jacobs, BrainOverflow, Storify, movies.io, epfl, fred, software, engineer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block pagetitle %}BrainOverflow by [Frederic Jacobs]{% endblock %}</title>
+  <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  {% if RSS_FEED_ENABLED %}
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ RSS_FEED_URL }}" />
+  {% endif %}
+  {% if DEV_DEPLOYMENT_MODE %}
+  <link rel="stylesheet/less" type="text/css" href="{{ MEDIA_URL }}less/styles.less">
+  <script src="{{ MEDIA_URL }}less/less-1.1.5.min.js" type="text/javascript"></script>
+  {% else %}
+  <link rel="stylesheet" href="{{ MEDIA_URL }}css/styles-{{ COMPRESS_REVISION_NUMBER }}.min.css" type="text/css" media="screen, projection">
+  {% endif %}
+</head>
+<body>
+<header class="main-header">
+  <hgroup>
+    <div class="picture">
+      <a href="/" rel="home"></a>
+    </div>
+    <h1>Frederic Jacobs</h1>
+    <h2>Software Engineer at <a href="http://www.storify.com">Storify</a></h2>
+  </hgroup>
+  <nav>
+    <ul class="main-nav">
+      <li><a href="/" id="home-link">Home</a></li>
+      <li><a href="http://twitter.com/#!/FredericJacobs" id="twitter-link">Twitter</a></li>
+      <li><a href="http://github.com/FredericJacobs" id="github-link">Github</a></li>
+      <li><a href="http://dribbble.com/FredericJacobs" id="dribbble-link">Dribbble</a></li>
+      <li><a href="http://instagr.am/FredericJacobs" id="instagram-link">Instagram</a></li>
+      <li><a href="https://foursquare.com/user/180022" id="foursquare-link">Foursquare</a></li>
+	  <li><a href="https://alpha.app.net/fredericjacobs">App.net</a></li>
+	  <li><a href="http://500px.com/FredericJacobs">Photography</a></li>
+      {% comment %}
+      <li><a href="http://fred.tent.is" id="tent-link">Tent.io</a></li>
+      <li><a href="http://soundcloud.com/FredericJacobs" id="soundcloud-link">Soundcloud</a></li>
+      {% endcomment %}
+      <li><a href="mailto:frederic.jacobs@mac.com?subject=Hello" id="contact-link">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+{% block main_section %}{% endblock %}
+<div class="mobile-nav">
+  <span class="nav-btn" id="mobile-nav-btn">
+    <span class="nav-btn-bar"></span>
+    <span class="nav-btn-bar"></span>
+    <span class="nav-btn-bar"></span>
+  </span>
+  <h3><a href="/">fredericjacobs.com</a></h3>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+var twitter_integration_enabled = {% if TWITTER_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    github_integration_enabled = {% if GITHUB_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    dribbble_integration_enabled = {% if DRIBBBLE_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    instagram_integration_enabled = {% if INSTAGRAM_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    lastfm_integration_enabled = {% if LASTFM_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    disqus_integration_enabled = {% if DISQUS_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    soundcloud_integration_enabled = {% if SOUNDCLOUD_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    bitbucket_integration_enabled = {% if BITBUCKET_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    foursquare_integration_enabled = {% if FOURSQUARE_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    disqus_integration_enabled = {% if DISQUS_INTEGRATION_ENABLED %}true{% else %}false{% endif %},
+    tent_integration_enabled = {% if TENT_INTEGRATION_ENABLED %}true{% else %}false{% endif %};
+
+
+{% if DISQUS_INTEGRATION_ENABLED %}var disqus_shortname = '{{ DISQUS_SHORTNAME }}';{% endif %}
+</script>
+
+{% if TENT_INTEGRATION_ENABLED %}
+<script type="text/javascript">
+  var tent_entity_uri = '{{ TENT_ENTITY_URI }}';
+  var tent_feed_url = '{{ TENT_FEED_URL }}';
+</script>
+{% endif %}
+
+{% if DEV_DEPLOYMENT_MODE %}
+<script src="{{ MEDIA_URL }}js/libs/jquery.url.js"></script>
+<script src="{{ MEDIA_URL }}js/libs/require.js"></script>
+<script src="{{ MEDIA_URL }}js/libs/handlebars.js"></script>
+<script src="{{ MEDIA_URL }}js/libs/moment.min.js"></script>
+<script src="{{ MEDIA_URL }}js/libs/bootstrap-modal.js"></script>
+<script src="{{ MEDIA_URL }}js/libs/spin.min.js"></script>
+<script src="{{ MEDIA_URL }}js/libs/prettify.js"></script>
+
+<script src="{{ MEDIA_URL }}js/components/base.js"></script>
+<script src="{{ MEDIA_URL }}js/components/mobile.js"></script>
+<script src="{{ MEDIA_URL }}js/components/blog-posts.js"></script>
+<script src="{{ MEDIA_URL }}js/components/links.js"></script>
+
+{% if TWITTER_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/twitter.js"></script>{% endif %}
+{% if GITHUB_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/github.js"></script>{% endif %}
+{% if DRIBBBLE_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/dribbble.js"></script>{% endif %}
+{% if INSTAGRAM_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/instagram.js"></script>{% endif %}
+{% if LASTFM_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/lastfm.js"></script>{% endif %}
+{% if BITBUCKET_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/bitbucket.js"></script>{% endif %}
+{% if DISQUS_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/disqus.js"></script>{% endif %}
+{% if SOUNDCLOUD_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/soundcloud.js"></script>{% endif %}
+{% if FOURSQUARE_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/foursquare.js"></script>{% endif %}
+{% if TENT_INTEGRATION_ENABLED %}<script src="{{ MEDIA_URL }}js/components/tent.js"></script>{% endif %}
+{% else %}
+<script src="{{ MEDIA_URL }}js/min/scripts-{{ COMPRESS_REVISION_NUMBER }}.min.js"></script>
+{% endif %}
+
+{% block extra_js %}{% endblock %}
+<script type="text/javascript">
+{% block extra_inline_js %}{% endblock %}
+
+{% if WOOPRA_TRACKING_DOMAIN %}
+// Start of woopra code
+function woopraReady(tracker) {
+    tracker.setDomain("{{WOOPRA_TRACKING_DOMAIN}}");
+    tracker.setIdleTimeout({{WOOPRA_TRACKING_IDLE_TIMEOUT}});
+    {% if WOOPRA_INCLUDE_QUERY %}
+    tracker.trackPageview({type:'pageview',url:window.location.pathname+window.location.search,title:document.title});
+    {% else %}
+    tracker.track();
+    {% endif %}
+    return false;
+}
+(function() {
+    var wsc = document.createElement('script');
+    wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
+    wsc.type = 'text/javascript';
+    wsc.async = true;
+    var ssc = document.getElementsByTagName('script')[0];
+    ssc.parentNode.insertBefore(wsc, ssc);
+})();
+// End of woopra code
+{% endif %}
+
+{% if GOOGLE_ANALYTICS_TRACKING_ID %}
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', '{{GOOGLE_ANALYTICS_TRACKING_ID}}']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+{% endif %}
+</script>
+</body>
+</html>
